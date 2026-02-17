@@ -1,4 +1,47 @@
 /*
+Data Cleansing, Transformation, and Loading to Silver Layer
+===============================================================================
+Script Purpose:
+    This script performs data cleansing, transformation, validation, and loading 
+    processes from the Bronze layer into the Silver layer for CRM and ERP datasets. 
+    The goal is to ensure data quality, consistency, and readiness for downstream 
+    analytics or Gold layer modeling.
+
+    The script includes:
+    - Data quality checks (NULL values, duplicates, unwanted spaces).
+    - Data standardization (gender, marital status, product line, country).
+    - Handling invalid or missing values.
+    - Date validation and conversion (INT → DATE).
+    - Derivation of calculated fields (sales, price recalculation).
+    - Slowly Changing Dimension (SCD Type 2) handling for product history.
+    - Key normalization and referential integrity validation between tables.
+    - Loading cleaned data into Silver schema tables.
+
+Processed Tables:
+    CRM:
+        - crm_cust_info
+        - crm_prd_info
+        - crm_sales_details
+    ERP:
+        - erp_cust_az12
+        - erp_loc_a101
+        - erp_px_cat_g1v2
+
+Data Quality Rules Applied:
+    - Remove NULL or duplicate primary keys.
+    - Trim unwanted spaces from string columns.
+    - Normalize categorical values into standardized formats.
+    - Replace invalid numeric values with derived or default values.
+    - Validate chronological correctness of date fields.
+    - Recalculate inconsistent financial metrics when necessary.
+    - Ensure referential integrity across related datasets.
+    - Handle invalid identifiers and formatting inconsistencies.
+
+Usage Notes:
+    - Execute after Bronze layer ingestion is completed.
+    - Recommended to run table-by-table validation queries before inserts.
+/*
+
 ============== crm_cust_info ==============
 */
 
