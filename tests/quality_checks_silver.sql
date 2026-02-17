@@ -731,6 +731,20 @@ select
 	maintenance
 from bronze.erp_px_cat_g1v2
 
+-- Check for Unwanted Spaces
+-- Expectation: No Results
+SELECT 
+    * 
+FROM silver.erp_px_cat_g1v2
+WHERE cat != TRIM(cat) 
+   OR subcat != TRIM(subcat) 
+   OR maintenance != TRIM(maintenance);
+
+-- Data Standardization & Consistency
+SELECT DISTINCT 
+    maintenance 
+FROM silver.erp_px_cat_g1v2;
+	
 -- Check data quality
 select * from silver.erp_px_cat_g1v2
 
