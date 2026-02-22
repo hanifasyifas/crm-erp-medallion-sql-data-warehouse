@@ -1,6 +1,46 @@
-/* 
-GOLD LAYER 
+/*
+Data Modeling, Integration, and Loading to Gold Layer
+===============================================================================
+Script Purpose:
+    This script performs data modeling, integration, and transformation 
+    processes from the Silver layer into the Gold layer for analytical 
+    consumption. The objective is to create business-ready datasets in the 
+    form of dimension and fact tables following a star schema design.
 
+    The script includes:
+    - Data integration across CRM and ERP datasets.
+    - Creation of dimension tables (customers, products).
+    - Creation of fact table (sales transactions).
+    - Surrogate key generation for dimensional modeling.
+    - Column renaming into business-friendly naming conventions.
+    - Filtering of historical or inactive records.
+    - Referential integrity validation between fact and dimension tables.
+    - Final object creation using SQL views in the Gold schema.
+
+Created Objects:
+    Dimensions:
+        - gold.dim_customers
+        - gold.dim_products
+
+    Facts:
+        - gold.fact_sales
+
+Data Modeling Rules Applied:
+    - Dimension tables contain descriptive attributes for analysis.
+    - Fact table contains measurable metrics and foreign keys to dimensions.
+    - Surrogate keys generated using ROW_NUMBER() for consistent joins.
+    - CRM data is treated as the master source where conflicts exist 
+      (e.g., gender information).
+    - Historical product records are filtered (prd_end_dt IS NULL).
+    - Business-friendly column names are applied for reporting clarity.
+    - Logical column grouping improves readability and usability.
+    - Referential integrity validated between fact and dimension tables.
+    - Left joins used to preserve transactional completeness.
+
+Usage Notes:
+    - Execute after Silver layer cleansing and validation are completed.
+    - Recommended to validate dimension tables before creating fact tables.
+    - Gold layer objects are designed for BI tools, dashboards, and analytics.
 */
 
 -- ========================================
